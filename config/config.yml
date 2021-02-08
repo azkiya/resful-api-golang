@@ -1,0 +1,5 @@
+environtment: dev
+mongo:
+  server: mongodb://mongo:27017
+  database: platformNews
+  collection: News,Topic

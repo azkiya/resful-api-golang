@@ -1,18 +1,37 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
+	"context"
 	"newsapp/config"
 	"newsapp/database"
+	"newsapp/handlers"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	conf := config.GetConfig()
-	db := database.ConnectDB(conf.Mongo)
-	fmt.Println(db)
-	r := mux.NewRouter()
-	http.ListenAndServe(":8080", r)
+	ctx := context.TODO()
+
+	db := database.ConnectDB(ctx, conf.Mongo)
+	collection := db.Collection(conf.Mongo.Collection)
+
+	client := &database.TopicClient{
+		Col: collection,
+		Ctx: ctx,
+	}
+
+	r := gin.Default()
+
+	topics := r.Group("/topics")
+	{
+		topics.POST("/", handlers.InsertTopic(client))
+	}
+
+	topics.GET("/", handlers.InsertTopic(client))
+
+	r.GET("/ping", handlers.Ping)
+
+	r.Run(":8080")
+
 }

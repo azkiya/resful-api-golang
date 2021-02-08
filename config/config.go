@@ -21,7 +21,7 @@ func GetConfig() Configuration {
 	viper.SetConfigType("yml")
 	viper.AddConfigPath("./config")
 
-	err := viper.ReadConfig()
+	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)
 	}

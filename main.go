@@ -1,13 +1,11 @@
 package main
 
 import (
-	"newsapp/handlers"
-
-	"github.com/gin-gonic/gin"
+	"fmt"
+	"newsapp/config"
 )
 
 func main() {
-	r := gin.Default()
-	r.GET("/ping", handlers.Ping)
-	r.Run()
+	conf := config.GetConfig()
+	fmt.Println((conf))
 }

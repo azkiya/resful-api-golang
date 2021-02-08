@@ -33,8 +33,6 @@ func main() {
 
 	}
 
-	topics.GET("/", handlers.InsertTopic(client))
-
 	r.GET("/ping", handlers.Ping)
 
 	r.Run(":8080")

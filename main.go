@@ -25,7 +25,12 @@ func main() {
 
 	topics := r.Group("/topics")
 	{
+		topics.GET("/", handlers.SearchTopic(client))
+		topics.GET("/:id", handlers.GetTopic(client))
 		topics.POST("/", handlers.InsertTopic(client))
+		topics.PATCH("/:id", handlers.UpdateTopic(client))
+		topics.DELETE("/:id", handlers.DeleteTopic(client))
+
 	}
 
 	topics.GET("/", handlers.InsertTopic(client))

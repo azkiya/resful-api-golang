@@ -21,6 +21,11 @@ func main() {
 		Ctx: ctx,
 	}
 
+	clientNews := &database.NewsClient{
+		Col: collection,
+		Ctx: ctx,
+	}
+
 	r := gin.Default()
 
 	topics := r.Group("/topics")
@@ -30,6 +35,15 @@ func main() {
 		topics.POST("/", handlers.InsertTopic(client))
 		topics.PATCH("/:id", handlers.UpdateTopic(client))
 		topics.DELETE("/:id", handlers.DeleteTopic(client))
+	}
+
+	news := r.Group("/news")
+	{
+		news.GET("/", handlers.SearchNews(clientNews))
+		news.GET("/:id", handlers.GetNews(clientNews))
+		news.POST("/", handlers.InsertNews(clientNews))
+		news.PATCH("/:id", handlers.UpdateNews(clientNews))
+		news.DELETE("/:id", handlers.DeleteNews(clientNews))
 
 	}
 

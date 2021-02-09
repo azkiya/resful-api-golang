@@ -19,3 +19,4 @@ This is a restful API News
 4. Run `docker-compose up --build` to install buil app.
 5. After success build, see the example app at `http://localhost:8080/news` to news route.
 6. `http://localhost:8080/topics` to topic route.
+7. Move to directory `test` and run `go test` to run unit test
